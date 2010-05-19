@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<!--<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />-->
+
+<script>MochiKit = {__export__: false};</script>
+<script src="js/external/MochiKit/Base.js"></script>
+<script src="js/external/MochiKit/Iter.js"></script>
+<script src="js/external/MochiKit/DOM.js"></script>
+<script src="js/external/MochiKit/Style.js"></script>
+<script src="js/external/MochiKit/Color.js"></script>
+
+<script src="js/Core.js"></script>
+<script src="js/Strings.js"></script>
+<script src="js/ObjFunc.js"></script>
+<script src="js/Source.js"></script>
+<script src="js/AdapterRegistries.js"></script>
+<script src="js/Asynchronous.js"></script>
+<script src="js/Algorithm.js"></script>
+<script src="js/ConverterField.js"></script>
+<script src="js/DOMEvents.js"></script>
+<script src="js/Listeners.js"></script>
+<script src="js/Deferred.js"></script>
+<script src="js/Dict.js"></script>
+<script src="js/Effect.js"></script>
+<script src="js/EffectLibrary.js"></script>
+<script src="js/Logging.js"></script>
+<script src="js/Iterable.js"></script>
+<script src="js/Elements.js"></script>
+<script src="js/Parser.js"></script>
+<script src="js/Fetcher.js"></script>
+<script src="js/ItemPointer.js"></script>
+<script src="js/Watcher.js"></script>
+<script src="js/List.js"></script>
+<script src="js/Set.js"></script>
+<script src="js/Multiset.js"></script>
+<script src="js/Tree.js"></script>
+<script src="js/TreeLibrary.js"></script>
+<script src="js/ElementList.js"></script>
+<script src="js/Switchable.js"></script>
+<script src="js/Effects.js"></script>
+<script src="js/Sorter.js"></script>
+<script src="js/Plumber.js"></script>
+<script src="js/Telescope.js"></script>
+<script src="js/Presenter.js"></script>
+<script src="js/Hierarchies.js"></script>
+<script src="js/Gridder.js"></script>
+<script src="js/Transitioner.js"></script>
+<script src="js/RadioCollection.js"></script>
+<script src="js/Widgets.js"></script>
+<script src="js/MetaObject.js"></script>
+<script src="js/FieldTemplate.js"></script>
+<script src="js/FieldSeed.js"></script>
+<script src="js/Field.js"></script>
+<script src="js/FieldAuthorizers.js"></script>
+<script src="js/Fields.js"></script>
+<script src="js/PrimitiveMapper.js"></script>
+<script src="js/Tabber.js"></script>
+<script src="js/RadioCollection.js"></script>
+<script src="js/EventMagnet.js"></script>
+<script src="js/Spriter.js"></script>
+<script src="js/Linkifier.js"></script>
+<script src="js/Anchorify.js"></script>
+<script src="js/Dropdown.js"></script>
+<script src="js/MultipleField.js"></script>
+<script src="js/Listbox.js"></script>
+<script src="js/RenderedSelection.js"></script>
+<script src="js/InputWatcher.js"></script>
+<script src="js/KeyDirector.js"></script>
+<script src="js/MouseDirector.js"></script>
+<script src="js/MappedDirector.js"></script>
+<script src="js/Selections.js"></script>
+<script src="js/Selector.js"></script>
+<script src="js/LazyPager.js"></script>
+<script src="js/Metalist.js"></script>
+<script src="js/RepeatingMetalist.js"></script>
+<script src="js/PatternedMetalist.js"></script>
+<script src="js/LazyList.js"></script>
+<script src="js/Box.js"></script>
+<script src="js/RangeViewer.js"></script>
+<script src="js/Ranger.js"></script>
+<script src="js/LazyRange.js"></script>
+<script src="js/Times.js"></script>
+<script src="js/ReplacingPageViewer.js"></script>
+<script src="js/RecyclingPageViewer.js"></script>
+<script src="js/MonthViewer.js"></script>
+<script src="js/Date.js"></script>
+<script src="js/ListMirror.js"></script>
+<script src="js/Calendar.js"></script>
+<script src="js/Spark.js"></script>
+<script src="js/Tetris.js"></script>
+
+<script> 
+
+function init_page() {
+	Sparks.add_initializer("EventMagnet Init", eventmagnet_initialize);
+	Sparks.initialize();
+}
+
+</script>
+
+<title>EventMagnet</title>
+
+<style>
+
+.tetris {
+	border:1px solid black;
+}
+
+.tetris tbody tr td{
+	/*border:1px solid #ccf;*/
+	width:2em;
+	height:2em;
+}
+
+.spriter_row {
+	clear:both;
+}
+
+.spriter_cell {
+	float:left;
+	border: 1px solid black;
+	width:2em;
+	height:2em;
+}
+
+.sprite_cell_clicked {
+	background:black;
+}
+
+ul {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+
+.temporary_message {
+	color: #888;
+}
+
+.temporary_error {
+	color: #c50;
+}
+
+input.error {
+	color: #c50;
+	background: #ffc;
+}
+
+th {
+	text-align:right;
+	border-bottom:1px solid #ccf;
+	color: #55f;
+	width:25em;
+}
+
+body {
+	font: 62.5% sans-serif;
+	margin:1em auto;
+	font-family: "Verdana", sans-serif;
+	width:98%;
+}
+
+.step_indicator {
+	font-size:1.1em;
+	color:#888;
+	font-weight:bold;
+	text-align:center;
+}
+
+.dictifier_minimized {
+	font-size:1.2em;
+	width:20em;
+	color:#77f;
+	font-weight:bold;
+}
+
+/* Field stuff */
+
+.field_title {
+	font-size:1.1em;
+	color:#88f;
+	padding-bottom:.2em;
+}	
+
+.field_text_field {
+	border: 1px solid #ccf;
+	width:98%;
+}
+
+.field_value_submitted {
+	color:#555;
+}
+
+.field_value_confirmed {
+	color:#393;
+}
+
+.field_value_failed {
+	color: #c50;
+}
+
+/* Key-Value stuff */
+
+.kv_key, .kv_value {
+	font-size:1.2em;
+}
+
+.kv_key {
+	width:7em;
+	color:#88f;
+	text-align:right;
+}
+
+.kv_value {
+	width:13em;
+}
+
+/* Tab shit */
+
+.tab {
+	font-size: 1.2em;
+	color: #55f;
+	border: 1px solid #ccf;
+	padding: .2em 1em .2em 1em;
+	white-space:nowrap;
+}
+
+.selected {
+	border-bottom: 1px solid white;
+	color:#666;
+}
+
+.tab_spacer {
+	padding-left: 1em;
+	border-bottom: 1px solid #ccf;
+}
+
+li.spacer {
+	padding-right:.5em;
+}
+
+.tab_options {
+	position:absolute;
+	margin-top:.3em;
+	padding:.3em;
+}
+
+.big_link, #new_tab, #window_trash {
+	color:#55f;
+	font-weight:bold;
+}
+
+#new_tab {
+	font-size:1.2em;
+	height:1.8em;
+	border-bottom:1px solid #ccf;
+	white-space:nowrap;
+	padding-left:1em;
+	padding-right:1em;
+}
+
+#window_trash {
+	border-bottom:1px solid #ccf;
+	font-size:1.2em;
+	text-align:right;
+	width:100%;
+	white-space:nowrap;
+}
+
+.disabled_link {
+	color:#888 !important;
+}
+
+div.spacer {
+	width:1em;
+}	
+
+.selected {
+	background-color: green;
+	font-weight:bold;
+	color:white;
+}
+
+.hovering {
+	cursor: pointer;
+	text-decoration:underline;
+}
+
+#page_title {
+    text-align:right;
+    border-bottom: 1px solid #99c;
+    font-size: large;
+    padding-top: .5em;
+    padding-bottom: .1em;
+	margin-bottom: .1em;
+    color: #222;
+    clear:both;
+}
+
+#tabs {
+	padding-top:.3em;
+}
+
+.field_option {
+	float:right;
+}
+
+.field_options {
+	height:1.1em;
+	margin:0;
+}
+
+.field_option_spacer {
+	float:right;
+}
+
+/* Bordered groupstuff */
+
+.bordered_group_container {
+	position:relative !important;
+	margin-top:1em;
+}
+
+.bordered_group_title {
+	position:absolute;
+	top:-.6em;
+	left:2%;
+	background: white;
+	padding: 0 .2em;
+}
+
+.bordered_group_content {
+	border: 1px solid #ddf;
+	width:96%;
+	padding:2%;
+}
+
+</style>
+
+</head>
+
+<body onload="init_page()">
+<!--<div id="page_title">EventMagnet</div>-->
+<table>
+	<tbody id="foo"></tbody>
+</table>	
+<div id="body">
+	<div id="tabs"></div>
+	<div id="object"></div>
+	<div style="font-size:1.2em" id="list"></div>
+</div>
+<!--<textarea id="debug" cols=150 rows=20 readonly="true"></textarea>-->
+</body>
+
+</html>

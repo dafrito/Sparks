@@ -1,0 +1,494 @@
+<api name="Sparks Framework">
+<namespace name="Algorithm" explicit="true" description="Encryption algorithms."/>
+<namespace name="Effects" explicit="true" description="Effects utility library."/>
+<namespace name="Event" explicit="true" description="Event processors."/>
+<namespace name="Tree" explicit="true" description="Tree utility library."/>
+
+<object name="effect" description="Effect object."/>
+<function name="is_effect" description="Is this object an Effect?"/>
+
+<object name="element_list" description="ElementList object."/>
+<function name="is_element_list" description="Is this object an ElementList?"/>
+
+<object name="switchable" description="Switches between displaying objects in a given list."/>
+<function name="is_switchable" description="Is this object a Switchable?"/>
+
+<object name="transitioner" description="Handles the two-state transition of an element."/>
+<function name="is_transitioner" description="Is this object a Transitioner?"/>
+
+<object name="input_watcher" description="Periodically watches a DOM Input field for changes."/>
+
+<object name="linkifier" description="A Transitioner managing effects over a link-like element."/>
+<object name="primitive_mapper" description="Maps primitive values to objects."/>
+<object name="radio_collection" 
+	description="Wraps around a list of given DOM radio buttons, handling tabbing and values as necessary."
+/>
+
+<object name="style_telescope" description="A Telescope designed for DOM style changes."/>
+
+<object name="tabber" description="Manages recursive tabbing in elements."/>
+<object name="telescope" description="Handles reversible changes to some object."/>
+
+<function name="fetch" description="Fetches DOM elements that match a given CSS3 rule."/>
+<function name="fetch_elements" description="Internal function used by fetch()."/>
+<function name="is_operator" description="Returns whether the given string is a boolean operator name."/>
+<function name="ordered_pointer_items" description="Utility function used in List events."/>
+<function name="parse_json" description="Parses JSON without using eval()."/>
+
+<!-- Laziness Namespace -->
+<namespace name="Laziness" description="Lazy data structures and utility">
+<object name="lazy_list" 
+	description="An ElementList with an overload:auto to lazily load newly viewed objects."
+/>
+<object name="lazy_pager" 
+	description="Maintains a list of requested items using given keys, handling caching and flushing as necessary."
+/>
+</namespace>
+
+<!-- Gridder Namespace -->
+<namespace name="Gridder" description="Grids and Plotting.">
+<object name="gridder" description="Handles the creation and navigation of a grid of DOM elemnts."/>
+<object name="plotter" description="Navigator over a given Gridder."/>
+</namespace>
+
+<!-- List Applications Namespace -->
+<namespace name="List Applications" description="Metalists, filtering, etc.">
+<object name="filtered_list" 
+	description="Object that observes a list and appends allowed items to another."
+/>
+<object name="metalist" description="Allows monitoring of a given List to form a second List."/>
+<object name="plumber" 
+	description="Given multiple sources and multiple destination, this plumbs newly added items to destinations based on a given authorizer."
+/>
+<object name="patterned_metalist" description="Metalist that generates a list using a given pattern."/>
+<object name="repeating_metalist" 
+	description="Metalist creating a List containing a given number of copies of a given List."
+/>
+<object name="sorter" description="Monitors a list and sorts it as necessary."/>
+</namespace>
+
+<!-- Data Structures Namespace -->
+<namespace name="Data Structures" description="Data structures.">
+<object name="multiset" description="Multiset data structure."/>
+<object name="dict" description="Event-enabled Dict data structure."/>
+<object name="list" description="Event-enabled List data structure."/>
+<object name="set" description="Event-enabled Set data structure."/>
+<object name="tree" description="Event-enabled tree data structure."/>
+<function name="is_dict" description="Is this object a Dict?"/>
+<function name="is_set" description="Is this object a Set?"/>
+<function name="is_tree" description="Is this object a Tree?"/>
+<function name="is_list" description="Is this object a List?"/>
+<object name="item_pointer" description="Offset to an item in a list, observing changes as necessary."/>
+<function name="is_item_pointer" description="Is this object an ItemPointer?"/>
+<object name="set_operations" description="Returns lazy set operations on two given lists."/>
+<object name="watcher" description = "Watches a dict's key for changes."/>
+<function name="is_watcher" description="Is this object a Watcher?"/>
+</namespaces>
+
+<!-- Elements Namespace -->
+<namespace name="Elements" description="DOM Manipulation">
+<function name="add_element_class" description="Adds a class safely to a DOM element."/> 
+<function name="anchor" description = "Positions a DOM element to another"/>
+<function name="append_child_nodes" 
+	description="Coerces given objects to DOM and appens them to the given element."
+/>	
+<function name="construct_to_child" 
+	description="Constructs a well-formed DOM hierarchy from the given parent to the given child"
+/>
+<function name="construct_to_parent" 
+	description="Takes a DOM element and constructs the ancestral part of its hierarchy."
+/>
+/>
+<object name="anchorify" 
+	description="Returns an object managing the anchoring of a DOM element to another."
+/>
+<object name="box" 
+	description="Returns an object containing calculated positions and dimensions for a DOM element."
+/>
+<function name="create_valid_child" description="Creates a valid child from the given DOM element."/>
+<function name="default_element" description="Returns a new DOM element."/>
+<object name="dom_event" description="DOM Event object."/>
+<function name="find_tree" description="Returns a DOM hierarchy containing the given DOM element."/>
+<function name="first_element" description="Returns the first real DOM child in a given DOM element. Conterpart of last_element()"/>
+<function name="get_anchor_offset" description="Returns the offset from the given anchor name"/>
+<function name="get_content" description="Returns the value of the given DOM element."/>
+<function name="get_parent" description="Returns the parent of the given DOM element."/>
+<function name="get_root" description="Returns the root DOM element of the given DOM tree."/>
+<function name="get_style" description="Returns the style value for the given rule name."/>
+<function name="get_style_ruleset" description="Returns a StyleRuleset for the provided rule name."/>
+<function name="is_ancestor" description="Returns whether the first DOM element is a parent of other."/>
+<function name="is_descendent" 
+	description="Returns whether the given DOM element is a child of the other."
+/>
+<function name="is_field_empty" description="Returns whether the DOM element has no value."/>
+<function name="is_dom" description="Is this object a DOM element?"/>
+<function name="is_radio_button" description="Is this object a radio button DOM element?"/>
+<function name="last_element" 
+	description="Returns the last real DOM child of the given DOM element. Counterpart of first_element()."
+/>
+<function name="linkify" description="Manages two-state listeners based on mouseovers."/>
+<function name="normalize_table" 
+	description="Corrects any unevenness in colspans of the given DOM table."
+/>
+<function name="normalize_tables" 
+	description="Calls normalize_table() on all tables under the given DOM element."
+/>
+<tree name="option_tree" description="Tree describing a well-formed OPTION hierarchy."/>
+<object name="random_color" description="Returns an random Color."/>
+<function name="remove_element" description="Removes the given DOM element."/>
+<function name="remove_element_class" 
+	description="Removes the given CSS class from the given DOM element."
+/>
+<function name="replace_child_nodes" 
+	description="Replaces all child nodes of a given DOM element with the coerced output of the given objects."
+/>
+<function name="set_content" 
+	description="Intelligently sets the content of the given DOM element to the given value."
+/>
+<function name="set_style" description="Sets a single style-rule in the given element."/>
+<function name="sum_colspan" description="Returns the total colspan of a given row."/>
+<function name="swap_dom" description="Swaps out a DOM element with a new coerced-object."/>
+<collection name="style_rulesets" 
+	description="Collection of rules concerning how to set and get CSS values."
+/>
+<tree name="table_body_tree" description="Tree describing a well-formed TBODY hierarchy."/>
+<tree name="table_head_tree" description="Tree describing a well-formed THEAD hierarchy."/>
+<tree name="ul_tree" description="Tree describing a well-formed UL hierarchy."/>
+<function name="update_style" description = "Updates the style of a DOM element using given rules."/>
+<function name="working_or_child" description = "Returns the given DOM element, or makes a new one."/>
+</namespace>
+
+<!-- Source Namespace -->
+<namespace name="Source" description="Event Management">
+<function name="_authorize_event" description="Internal authorize function."/>
+<function name="_pass_to_handlers" description="Internal handler calling function."/>
+<function name="add_event_authorizer" description="Adds an event authorizer."/>
+<function name="add_event_catcher" description="Adds an event catcher."/>
+<function name="add_event_handlers" description="Internal handler-addition function."/>
+<function name="add_event_listener" description="Adds an event listener."/>
+<function name="authorize_event" 
+	description="Authorizes an event, returning a Deferred indicating its result."
+/>
+<collection name="event_action_packets" description="Collection of EventActionPackets."/>
+<function name="event_descendents" description="Returns an array of descendents for the given event."/>
+<tree name="event_hierarchy" description="Event hierarchy."/>
+<object name="event_source" description="EventSource base class. Mostly outdated."/>
+<function name="get_current_event" 
+	description="Returns the current working Deferred event for the given object."
+/>
+<function name="is_event_source" description="Is this object an EventSource?"/>
+<function name="mirror_event" 
+	description="Observes an event action from one object and sends it to a processor or object."
+/>
+<function name="pass_to_handlers" 
+	description="Internal function that passes an event to interested listeners."
+/>	
+<function name="preprocess_event_args" 
+	description="Calls a event action preprocessor for the given arguments."
+/>
+<function name="push_event" 
+	description="Pushes an event to authorizers, then to either listeners or catchers."
+/>
+<function name="set_event_action_attacher" description="Sets an attacher for a given event action."/>
+<function name="set_event_action_preprocessor" 
+	description="Sets the preprocessor for a given event action."
+/>
+<function name="signal_event" description = "Signals an event."/>
+</namespace>
+
+<!-- Core Namespace -->
+<namespace name="Core" description="Mathematics, utility">
+<function name="add_initializer" description="Adds an initializer called from initialize()."/>
+<function name="array_range" description="Returns an array of numbers spanning the given range."/>
+<function name="__repr__" description="Default repr function."/>
+<function name="best_distance" 
+	description="Returns the best direction given two values, a looping range, and a step size."
+/>
+<function name="blind" description="Blindly returns the first argument given."/>
+<object name="color" description="Color class allowing HSL, RGB, and alpha calculations."/>
+<function name="counter" description="A function that counts upwards from 0."/>
+<boolean name="debug" description="Boolean indicating whether Sparks is in debug-mode or not."/>
+<function name="enforce_looping_range" 
+	description="Returns a value that's within a given range, looping outstanding values."
+/>
+<function name="enforce_range" 
+	description="Returns a value that's within a given range, trimming outstanding values."
+/>	
+<function name="exhaust" 
+	description="Calls all functions in an array, removing them as they're called."
+/>
+<function name="exhauster" description="Returns a exhaust() with a partially applied given array."/>
+<function name="falser" description="Always returns false. Counterpart of truer."/>
+<function name="fire_reversibles" 
+	description="Fires listeners, appending any returned functions to a given second list."
+/>
+<function name="generate_id" description="Coerces an id from the given object."/>
+<function name="get_args" description="Returns an array of arguments from the given Arguments object."/>
+<function name="get_dict_items" description="Returns a Dict's items from the given Dict."/>
+<function name="get_items" description="Returns the items from the given list-like object."/>
+<function name="get_node_operators" description="Returns the NodeOperators from the given tree."/>
+<function name="get_position" description="Returns the position from a given ItemPointer or integer."/>
+<function name="get_shortest_distance" 
+	description="Returns the shortest distance from two given values, allowing for looping."
+/>
+<function name="get_title" description="Coerces a title from the given object."/>
+<function name="initialize" description="Exhausts all initializers once called."/>
+<collection name="initializers" description="Collection of initializers. Run from initialize()"/>
+<function name="is_obj_func" description="Is this object an obj_func?"/>
+<function name="izzer" 
+	description="Returns a function testing whether the .type of an object matches a provided string."
+/>
+<function name="is_color" description="Is this object a Color?"/>
+<function name="keys" description="Returns all keys of a given object. Counterpart of values()"/>
+<function name="list_applier" 
+	description="Returns a function that applies a given list as arguments to a given function."
+/>
+<function name="listener_adder" 
+	description="Returns a function that adds removable listeners to a given array."
+/>
+<function name="magnitude" description="Returns the floored log base-ten of the given number."/>
+<string name="notime" description="No time!"/>
+<collection name="numbers" description="Contains [0,1,2,3,4,5,6,7,8,9]"/>
+<function name="noop" description="This function does nothing."/>
+<function name="object_adder" 
+	description="Returns a function to add removable objects to the given array."
+/>
+<namespace name="operator" explict="true" 
+	description="A collection of operators provided as functions."
+/>
+<function name="output" description="Coerces some input to DOM elements."/>
+<function name="partition_array" description="Slices a given array into a given number of slices."/>
+<function name="range" description="Returns an array spanning the given extremes, using a given step."/>
+<function name="string_tester" 
+	description="Returns a function that tests for a string-match using coerced rules."
+/>
+<function name="strip_args" 
+	description="Returns a function calling the given function, ignoring passed arguments."
+/>
+<object name="timer" description="Timer class. Mostly deprecated."/>
+<function name="toString" description="Default toString() function."/>
+<function name="tolerant_equal" 
+	description="Returns whether a value is equal to another within a given tolerance."
+/>
+<function name="truer" description="Function always returning true. Counterpart of falser()."/>
+<function name="throw_event" description="Fires an event to interested catchers."/>
+<function name="values" description = "Returns all values for a given object. Counterpart of keys()"/>
+<function name="obj_func" description="Returns a function with arguments partially applied."/>
+</namespace>
+
+<!-- Iterable Namespace -->
+<namespace name="Iterable" description="Functions augmenting the iteration and searching of lists."/>
+<function name="coerce_array" 
+	description="Returns an array if one is given, or makes one containing the given argument"
+/>
+<function name="difference" 
+	description="Returns a list with the second list's items removed from the first."
+/>
+<function name="equal" description="Returns whether two objects are equal given a comparator."/>
+<function name="every" 
+	description="Returns true if all items in an array pass a given test. Counterpart of some()"
+/>
+<function name="filter" description="Filters a list using a given function."/>
+<function name="find_value" 
+	description="Returns an offset of an object in a given list using a given comparator."
+/>
+<function name="first" description="Returns the first element in a given list. Counterpart of last()"/>
+<function name="flatten" 
+	description="Flattens a list and all lists contained within it to a single array."
+/>
+<function name="get_random" description="Returns a random element from the given element."/>
+<function name="intersection" description="Returns a list of items contained in both given lists using a given comparator."/>
+<function name="is_found" 
+	description="Returns whether a given object exists in a given list using a given comparator."
+/>
+<function name="last" description="Returns the last element of the given list-like object."/>
+<function name="map" description="Calls the given function for each item in the given list."/>
+<function name="map_call" description="Calls the provided function for each item in the given list."/>
+<function name="merge_lists" description="Merges two sorted lists together into one."/>
+<function name="reduce" 
+	description="Iterates over a list, passing the working value with the current iterator's value to a given function."
+/>
+<function name="repeat" description="Repeats a given value a given number of times."/>
+<function name="shuffle" 
+	description="Returns a list containing all elements in the given one in a random order."
+/>
+<function name="simplify" description = "Simplifies nested arrays by merging one-item arrays."/>
+<function name="some" description = "Returns true if any of the passed list passes a given test."/>
+<function name="stable_sorted" description="Sorts a list, preserving order of equal elements."/>
+</namespace>
+
+<!-- Widgets Namespace -->
+<namespace name="Widgets" description="Widget Library">
+<function name="is_widget" description="Is this object a Widget?"/>
+<object name="accordion" description = "Accordion widget."/>
+<object name="button" description="Button widget."/>
+<object name="dom_grid" description="Returns a grid of DOM elements."/>
+<object name="dropdown" description="Dropdown widget."/>
+<object name="listbox" description="Listbox widget."/>
+<object name="stater" description="Stater widget indicating the status of some action."/>
+<object name="spriter" description="Creates a DOM grid that allows drawing. Deprecated."/>
+<object name="tabs" description="Tabs widget."/>
+<object name="toggleable" description="Toggleable widget."/>
+<object name="widget" description = "Widget class. Usually used as a base for more complex widgets."/>
+<object name="selector" description="A RenderedSelection with an ElementList connected to it."/>
+</namespace>
+
+<!-- Asyncronous Namespace -->
+<namespace name="Asynchronous" description="Asynchrony."/>
+<function name="add_listener" description = "Adds a listener to a recursive-enabled deferred."/>
+<function name="chain_results" description="Attaches listeners to a list of Deferreds serially."/>
+<object name="delayed" description="Object handling delayed calls and allowing repetition and timing."/>
+<function name="fail" description="Returns a failed Deferred."/>
+<object name="gather_results" 
+	description="Gathers results from a given list of Deferreds and callbacks once all are completed."
+/>
+<function name="reduce_deferred" 
+	description="Returns a Deferred that callbacks when the given value is recursed to a non-Deferred value."
+/>
+<function name="succeed" description="Returns a succeeded Deferred. Counterpart of fail()"/>
+<function name="wait" description = "Calls a function after a given interval passes."/>
+</namespace>
+
+<!-- Deferred Namespace -->
+<namespace name="Deferred" description="Asynchronous objects."/>
+<object name="deferred" description="Object handling asynchronous requests."/>
+<object name="deferred_lock" description="Object that handles mutex-locking."/>
+<function name="is_deferred" description="Is this object a Deferred?"/>
+<function name="is_deferred_lock" description="Is this object a DeferredLock?"/>
+<object name="xhr" description = "A cross-platform XHR creator."/>
+<object name="xhr_deferred" description = "Returns a Deferred wrapping a XHR."/>
+</namespace>
+
+<!-- Fields Namespace -->
+<namespace name="Fields" description="Fields and utility involving them">
+<function name="attach_mapper" description="Attaches a PrimitiveMapper to the given Field."/>
+<collection name="FieldAuthorizers" description="Field authorizer collection."/>
+<collection name="FieldHierarchy" description="Field type hierarchy."/>
+<collection name="MetaObjects" description="List of MetaObjects keyed by their type-name."/>
+<function name="authorize_field_value" 
+	description="Authorizes a given Field's value using FieldAuthorizers."
+/>
+<object name="checkbox_field" description="Field managing a list of checkboxes."/>
+<object name="converter_field" description="Field that converts text to an object and vice-versa."/>
+<object name="field" description="Field object."/>
+<object name="field_seed" description="Seeds a field using a given MetaObject."/>
+<object name="field_template" description="Object describing the rules applying to a Field."/>
+<function name="is_field" description="Is this object a Field?"/>
+<function name="is_field_template" description="Is this object an FieldTemplate?"/>
+<function name="is_meta_object" description="Is this object a MetaObject?"/>
+<object name="mapped_text_field" description="Field with an attached PrimitiveMapper."/>
+<object name="meta_object" 
+	description="Object that handles creation of an object, and assignment of field authorizers to it."
+/>
+<object name="multiple_field" 
+	description="Field with multiple given Fields, using their combined results as its value."
+/>
+<function name="parse_field_requirements" 
+	description="Returns a Field prerequisite hierarchy from a given tree."
+/>
+<object name="radio_field" description="Field using a RadioCollection."/>
+<object name="text_field" description="Field managing a text-field."/>
+</namespace>
+
+<!-- Presenters Namespace -->
+<namespace name="Presenters" description="Presenters">
+<function name="attach_presenter" description="Attaches a Presenter to a given object."/>
+<collection name="PresenterHierarchies" description="Collection of hierarchies used in Presenters."/>
+<collection name="Presenters" description="Collection of Presenters coerced by widgets."/>
+<function name="get_presenter" description="Returns a Presenter corresponding to a given string."/>
+<function name="get_presenter_hierarchy" 
+	description="Returns a Presenter hierarchy using the given string."
+/>
+<function name="is_presenter" description="Is this object a Presenter?"/>
+<object name="presenter" 
+	description="Tree-based output using registered processor and post-processors for each node."
+/>
+</namespace>
+
+<!-- Event Listeners Namespace -->
+<namespace name="Listeners" description="Convenient DOM event listeners">
+<object name="click_listener" description="Listens to a DOM element for onclick events."/>
+<object name="dual_event_listener" description="A utility listener managing two opposing events."/>
+<function name="event_listener" 
+	description="Utility function that listens for an event from the given source."
+/>
+<object name="focus_listener" description="DualEventListener for onfocus and onblur."/>
+<object name="key_listener" description="Listens to a DOM element for onkeypress events."/>
+<object name="mouse_listener" 
+	description="DualEventListener monitoring mouse events from a given DOM element."
+/>
+<object name="movement_listener" 
+	description="EventListener monitoring mousemove events from a given DOM element."
+/>
+<object name="scroll_listener" description="Listener that fires onscroll events."/>
+</namespace>
+
+<!-- Strings Namespace -->
+<namespace name="Strings" description="String utility functions">
+<function name="convert_string" 
+	description="Converts the given value to the given type. Used in Algorithm."
+/>
+<function name="fibonacci_deobfuscator" 
+	description="Decodes a string encoded by fibonacci_obfuscator()."
+/>
+<function name="fibonacci_iterator" description="Returns an iterator over all fibonacci numbers."/>
+<function name="fibonacci_obfuscator" 
+	description="Encodes a string by inserting increasing amounts of white noise."
+/>
+<function name="get_file_parts" 
+	description="Splits an extension from the filename using the given string."
+/>
+<function name="get_hex_string" description="Convenience function that calls convert_string(str, 'hex'"/>
+<function name="get_permutation_count" description="Returns the number of possible sorts for the given string."/>
+<function name="get_permutations" description="Returns all possible sorts for a given string."/>
+<function name="interpolate" description="String interpolation."/>
+<function name="is_upper_case" description="Returns whether the given string contains no lowercase."/>
+<function name="is_lower_case" description="Returns whether this string doesnt contain lowercase."/>
+<function name="join" description="Joins all given arguments into a single string, repr()ing each."/>
+<function name="lowercase" description="Returns a lowercase version of the given string."/>
+<function name="pad" description="Pads a given string to a given length from a given direction."/>
+<function name="parse_css" description="Turns a CSS rule string into an object."/>
+<function name="proper_nounize" description="Returns a string acting as a proper noun."/>
+<function name="print_array" description="Pretty prints an array of primitive values."/>
+<function name="pluralize" 
+	description="Returns the correct spelling of a word using a given number, root and a plural suffix."
+/>
+<function name="remove_function_bodies" 
+	description="Takes a string value of a function, and returns that with all content inside curly brackets omitted."
+/>
+<function name="snakerize" description = "Returns a snakerized version of a camelized string."/>
+<function name="split_string" description="Splits a string into a number of given-length segments."/>
+<function name="trim" description="Returns the given string without trailing and leading whitespace."/> 
+<function name="uppercase" description = "Returns the uppercase version of a given string."/>
+<function name="unescape_html" description = "Changes escaped strings back into their natural form."/>
+</namespace>
+
+<!-- Directors Namespace -->
+<namespace name="Directors" description="Directors connecting input to Selection.">
+<object name="key_director" description="Director using keystrokes for Selections."/>
+<object name="mouse_director" 
+	description="Director that monitors mouse events with plugs for a Selection."
+/>
+<object name="mapped_director" description="Manages a Selection through a PrimitiveMapper."/>
+</namespace>
+
+<!-- Logging Namespace -->
+<namespace name="Logging" description="Logging.">
+<function name="log" description="Cross-platform logging."/>
+<function name="log_interpolated" description="Logs a message using interpolate()"/>
+<function name="log_joined" description="Logs a message using join()"/>
+<function name="log_repr" description="Logs a message using repr() on all given arguments."/>
+<function name="log_urgent" description="Logs a message regardless of whether debug is set."/>
+<function name="print_to_console" description="Prints a message to the debugging console."/>
+</namespace>
+
+<!-- Selection Namespace -->
+<namespace name="Selection" description="Selections">
+<object name="multiple_selection" description="Selection managing multiple items."/>
+<object name="range_selection" description="Selection over a range of values."/>
+<object name="selection" description="Object that allows list-independent selection."/>
+<object name="single_selection" description="Selection managing a single item."/>
+<object name="rendered_selection" description="Given a Selection, this applies it to a List, returning a List of those values."/>
+</namespace>
+
+</api>

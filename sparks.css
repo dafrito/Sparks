@@ -1,0 +1,214 @@
+.login_submit {
+	color: blue;
+	font-size: .9em;
+}
+
+.selectable {
+	color: blue;
+}
+
+.underlined {
+	text-decoration: underline;
+}
+
+.hovering, .hovering_date { 
+	cursor:pointer;
+}
+
+body{
+	padding: 0px;
+	margin: 0px;
+	font: normal 14px 'Verdana', sans-serif;
+}
+
+.link {
+	color:#88f;
+}
+
+.moving {
+	visibility:hidden;
+}
+
+/***/
+/* Key Value */
+
+.key_value {
+	width: 350px;
+	clear:both;
+	margin:1em;
+}
+
+.key_value_row {
+	width: 100%;
+	clear:both;
+}
+
+.key_value_key {
+	color: #88f;
+	width:48%;
+	margin-right:2%;
+	float:left;
+	text-align: right;
+}
+
+.key_value_value {
+	color: #444;
+}	
+
+/****************/
+/* Image Viewer */
+
+.thumbnail {
+	padding: 3px;
+	margin-right: 1em;
+	margin-bottom: 1em;
+	border: 1px solid #aaf;
+}
+
+.selectable_image {
+	border: 1px solid #ccc;
+	cursor: pointer;
+}
+
+/*****************/
+/* Step Selector */
+
+.step_selector {
+	text-align: center;
+}
+
+.step_selector_expanded_tab {
+	color: blue;
+	font-size: .7em;
+	text-align: right;
+	cursor:pointer;
+}
+
+.step_selector_current_step {
+	vertical-align: top; 
+	width:15em; 
+	text-align:center;
+	color: #55f;
+}
+
+.step_selector_expander_close {
+	text-align: right;
+	font-size: .7em;
+}
+
+.step_selector_jumper {
+	vertical-align: top;
+	color: #666;
+}
+
+.live_step_selector_jumper {
+	vertical-align: top;
+	color: #66f;
+}	
+
+/**************/
+/* Page viewer */
+
+.page_viewer {
+	margin-left: 1em;
+	margin-top: .8em;
+	margin-right: 1em;
+	margin-bottom: 1em;
+}
+
+/****************/
+/* Tab Selector */
+
+.tab_container {
+	margin-top:.5em;
+	font-size: .9em;
+	border-collapse: separate;
+}
+
+.tab_spacer, .tab_wrapper, .selectable_tab_wrapper {
+}
+
+.tab_wrapper, .selectable_tab_wrapper {
+	border: 1px solid #ccf; 
+	border-bottom: .15em solid #ccf;
+	color: #88f;
+}
+
+.tab_spacer {
+	border-bottom: .15em solid #ccf; 
+	width:1em;
+}
+	
+.tab_wrapper {
+	color: #666;
+	border-bottom: 0px solid white;
+}
+
+.tab_body {
+	padding: .2em;
+	padding-left: 1em; 
+	padding-right: 1em; 
+}
+
+/* Sparklet stuff */
+
+.sparklet_error {
+	font-size: .7em;
+	color:red;
+}
+
+.sparklet_close {
+	font-size: .7em;
+	color:blue;
+}
+
+.sparklet_invalid_field {
+	background:orange;
+}
+
+.sparklet_selectable {
+	color:#77f;
+}
+
+.spark_date, .month_selector, .date_selector, .time_selector {
+	color:#77f;
+}
+
+/* Calendar */
+
+.calendar {
+	text-align:center;
+}
+
+.current_month_date, .neighbor_month_date {
+	text-align: center;
+	padding: .2em;
+	color: #66f;
+}
+
+.neighbor_month_date {
+	color: #aaf;
+}
+
+.calendar_day {
+	font-weight: bold;
+	color: #666;
+}
+
+.hovering_date {
+	text-decoration: underline;
+	cursor:pointer;
+	background: #bbf;
+	color: white;
+}
+
+.calendar_highlight {
+	background: #5a5;
+	color: white;
+}
+
+.open_calendar_highlight {
+}
+
+.close_calendar_highlight {
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>Sparks Javascript Framework</title>
+<link rel="stylesheet" type="text/css" href="sparks.css"/>
+</head>
+
+<body>
+<div id="banner">Sparks Javascript Framework</div>
+<div id="splash">Bitchin'</div>
+<div id="body">
+<dl>
+<dt>
+What is Sparks?
+<dd>It's a Javascript framework built upon MochiKit covering:
+<ul>
+<li>Data structures
+<li>Events
+<li>Presentation
+<li>Effects
+<li>Asynchrony
+</ul>
+<dt>
+Why write another framework?
+<dd>Sparks is an approach to client-side frameworks based around transparency. Instead of giving you monolithic objects with approachabilty only at the top level, Sparks is built upon itself; Each layer builds on the strength of the ones beneath it, allowing developers to choose their own level of detail, instead of being forced down a single, rigid path.
+<dt>
+What isn't Sparks?
+<dd>Sparks is not intended to be a out-of-the-box widget set. It's not a DSL. It won't overload your basic Javascript objects.
+<dt>What's "transparency" mean? Layers?
+<dd>
+Sparks takes inheritance and contractualness very seriously. For a simple example, the Button object is a Widget, which is an Event Source. All objects in this chain are real objects with distinct roles - there is no padding of the dependency tree just for the sake of it.
+</dl>
+</div>
+</body>
+</html>

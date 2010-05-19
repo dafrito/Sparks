@@ -1,0 +1,206 @@
+Properties:
+
+'''.id'''
+Unique id for the Widget, used as a key for the Widget in the global dict, and as the default id for the root DOM element when output() is called.
+
+'''.title'''
+Human-readable name of the Widget.
+
+'''.notifier'''
+Notifier object
+
+'''.selected'''
+If applicable, ''selected'' is the key in items of the currently selected object.
+
+'''.items'''
+If applicable, ''items'' is an array, or dict, that contains all values that the Widget uses in its output. How ''items'' is displayed is Widget-dependent.
+
+
+Methods:
+
+'''''constructor''([id, [title]])'''
+This is the constructor of the object, not a constructor() function.
+
+''Arguments''
+id - optional, this is the id for the Widget. If this id is already taken, the Widget is given a new unique id.
+
+title - optional, this is the title for the Widget.
+
+''Returns''
+The Widget.
+
+''Notes''
+This will not draw the Widget.
+
+'''display([replacing_id])'''
+Draws the Widget.
+
+''Arguments''
+replacing_id - optional, this is the id, or the element, that is replaced by the returned value from output(). If undefined, ''id'' is used.
+
+'''output([parent])'''
+Constructs, but does not draw, the Widget.
+
+''Arguments''
+parent - optional, this is the root element of the Widget that the Widget appends its elements to. If ''parent'' is undefined, a new DOM element is created.
+
+''Returns''
+The constucted Widget.
+
+''Notes''
+This function does not actually draw the Widget unless parent is already a part of the visible DOM tree. Note that parent's node attributes, including its id and class, may be modified.
+
+'''toString()'''
+Returns debug-spew for the Widget.
+
+''Returns''
+The debug-spew for the widget.
+
+Methods available only when applicable:
+'''add(item[, key])'''
+Tries to add an item to the Widget.
+
+''Arguments''
+item - item to add.
+key - optional, makes items[''key''] = item. If items[''key''] is taken, set(''key'', ''item'') is called.
+
+''Events Triggered''
+[[^Widget Events^item_added]]
+
+''Notes''
+This will not redraw the Widget.
+This is an atomic operation. If any key/value pair isn't allowed to be added, none of the items are added.
+
+'''add_all(''values'')'''
+Tries to add all the items in values to the Widget.
+
+''Arguments''
+values - array, or dict, of items to add.
+
+''Notes''
+If this Widget uses a dict for ''items'', ''values'' should also be a dict. If not, keys for each value are resolved in the following order: first, key is attempted, then value.title, then value.id, then a generic, unique name.
+This is an atomic operation. If any item isn't allowed to be added, none of the items are added.
+This will not redraw the Widget.
+
+''Events Triggered''
+[[^Widget Events^item_added]]
+
+'''clear()'''
+Resets ''items'' to being empty.
+
+''Returns''
+All removed items.
+
+''Notes''
+This is an atomic operation. If any item doesn't allow itself to be removed, none of the items are removed. All keys in ''items'' are passed to remove_key.
+
+'''jump([''value''])'''
+Tries to jump ''value'' places in ''items''.
+
+''Arguments''
+value - optional, number of places to jump. Defaults to 1.
+
+''Returns''
+The new selected.
+
+''Events Triggered''
+[[^Widget Events^item_selected]]
+
+''Notes''
+The new selected will always be valid, so if selected is less than zero or greater than items.length, it will loop to a valid value.
+
+'''remove(item)'''
+Removes ''items''[''item''] and all values in ''items'' that equal ''item''.
+
+''Arguments''
+item - value to remove.
+
+''Returns''
+Removed values.
+
+''Events Triggered''
+[[^Widget Events^item_removed]]
+
+''Notes''
+This will not redraw the Widget.
+If ''selected'' is removed, a new one will be found in items via calls to select().
+This is an atomic operation; if any values in ''values'' aren't allowed to be removed, none will be removed.
+
+'''remove_all(values)'''
+Calls remove for all values in values.
+
+''Arguments''
+values - values to remove.
+
+''Returns''
+An array of all removed values.
+
+''Events Triggered''
+[[^Widget Events^item_removed]]
+
+''Notes''
+This will not redraw the Widget. If ''selected'' is removed, a new one will be found in ''items'' via calls to select().
+This is an atomic operation; if any values in ''values'' aren't allowed to be removed, none will be removed.
+
+'''remove_key(''key'')'''
+Removes ''items''[''key'']
+
+''Arguments''
+key - key to remove from items
+
+''Returns''
+An array of all removed items.
+
+''Events Triggered''
+[[^Widget Events^item_removed]]
+
+''Notes''
+This will not redraw the Widget.
+If ''selected'' is removed, a new one will be found in items via calls to select(). If ''key'' is an Array, each value in ''key'' is passed to remove_key.
+This is an atomic operation. If ''key'' is an Array and any value in ''key'' isn't allowed to be removed, no values will be removed.
+
+'''remove_value(''item'')'''
+Tries to remove all values in ''items'' that equal ''item''.
+
+''Arguments''
+item - item to remove
+
+''Returns''
+An array of all removed items.
+
+Events Triggered
+[[^Widget Events^item_removed]]
+
+Notes
+This will not redraw the Widget.
+If selected is removed, a new one will be found in items via calls to select().
+This is an atomic operation; if any value isn't allowed to be removed, no items are removed.
+
+'''select(''item'')'''
+Tries to make ''selected'' equal ''item''.
+
+''Arguments''
+item - item to select
+
+''Returns''
+The new selected.
+
+''Events Triggered''
+[[^Widget Events^item_selected]]
+
+''Notes''
+First searches for items[item], and if that is undefined, the first value that matches item. If a new item is selected, the Widget will then be redrawn.
+
+'''set(''key'', ''item'')'''
+Tries to set ''items''[''key''] to ''item''.
+
+''Arguments''
+key - key for ''items''.
+item - value for ''items''.
+
+''Events Triggered''
+[[^Widget Events^item_added]]. item_removed and item_selected may be called as well.
+
+''Notes''
+If ''items''[''key''] is taken, it is replaced by ''item''.
+This is an atomic operation - if the item is not allowed to be added, or the existing  ''items''[''key''] is not allowed to be removed, ''items'' will remain unchanged as it was at the beginning of the call.

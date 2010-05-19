@@ -1,0 +1,24 @@
+README for Sparks
+For more information, go to http://wiki.geekfire.com/view/Widget_API.
+
+== Features ==
+Sparks is a collection of standardized, modular Javascript interactive controls.
+
+== Copying ==
+Sparks is copyright (c) 2000-2006, Geekfire, Inc. 
+For an explanation of license terms, see COPYRIGHT.
+
+== Dependencies == 
+
+Mochikit v1.4 or greater - http://www.mochikit.com/doc/html/MochiKit/index.html
+
+== Using ==
+
+Include Sparks.base.js along with any or all of the Sparks you'd like. You should also 
+include sparks.css if you don't intend to write a custom stylesheet.
+
+Some Sparks use other Sparks and will error on creation if they are not yet included.
+Intra-Spark dependencies are indicated at the beginning of each Sparks file, and at the 
+URL at the top of this file.
+
+All Sparks share a common set of methods and properties. These are listed at the API.

@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<!-- MochiKit -->
+<script type="text/javascript" src="js/external/MochiKit/MochiKit.js"></script>
+<script type="text/javascript" src="js/external/MochiKit/Base.js"></script>
+<script type="text/javascript" src="js/external/MochiKit/Iter.js"></script>
+<script type="text/javascript" src="js/external/MochiKit/Async.js"></script>
+<script type="text/javascript" src="js/external/MochiKit/DOM.js"></script>
+<script type="text/javascript" src="js/external/MochiKit/Logging.js"></script>
+<script type="text/javascript" src="js/external/MochiKit/Signal.js"></script>
+<script type="text/javascript" src="js/external/MochiKit/DragAndDrop.js"></script>
+<script src="js/external/MochiKit/Sortable.js"></script>
+
+<script>
+function assert() { return; }
+
+function init_page() {
+	try {
+	} catch(e) {
+		logError(e);
+	}
+}
+
+function highlight() {
+	//Highlight("test_div", {startcolor:"#ccccff"});
+}
+
+function mouseover(tag) {
+	switch(tag) {
+		case 'blue':
+			swapDOM("range_selected", SPAN({id:'range_selected'}, "Dell Performance Concert: 6:00pm - 6:50pm"));
+			break;
+		case 'blue_late':
+			swapDOM("range_selected", SPAN({id:'range_selected'}, "Dell Performance Concert: 9:00pm - 9:50pm"));
+			break;
+		case 'green':
+			swapDOM("range_selected", SPAN({id:'range_selected'}, "XPS 5000: 7:00 - 7:50pm"));
+			break;
+		default:
+			swapDOM("range_selected", SPAN({id:'range_selected'}, "Mouseover an event."));
+	}
+}
+
+</script>
+
+<title>Sparks 2.0 Visual Testbed</title>
+
+<style>
+	body {
+		font-family: "Verdana", "Bitstream Vera Sans", sans-serif;
+		font-size: 62.5%;
+		line-height: 0;
+	}
+
+	div.object_title {
+		clear:both;
+		font-size: 1.3em;
+		/* color: #22c; */
+		line-height: 1.5em;
+		color: blue;
+		font-weight:bold;
+		text-align:right;
+		width: 100%;
+		border-bottom: 1px solid #ccf;
+		margin-bottom: .2em;
+	}
+
+	div.object_title:hover {
+		text-decoration: underline;
+		cursor:pointer;
+	}
+
+	div.object {
+		width: 35.0em;
+		margin-bottom: 1em;
+	}
+
+	span.object_selectable_option {
+		color: blue;
+	}
+
+	.key_value {
+		margin:auto;
+	}
+
+	.key_value_key {
+		text-align: right;
+		color: #88f;
+	}
+
+	.key_value_value {
+		color: #222;
+	}
+
+	div.object_options_status {
+		margin-right: 1em;
+		text-align: right; 
+		line-height: 1.2em;
+		margin-bottom: .2em;
+	}
+
+	span.object_status {
+		padding-right: .5em;
+		
+	}
+
+	table {
+		font-size: 1.2em;
+	}
+
+	td {
+		line-height: 1.2em;
+	}
+
+	.range_container {
+		margin-bottom: 1em;
+	}
+
+	.range_title {
+		color: #55f;
+		margin-left: .5em;
+		font-size: 1.4em;
+		line-height: 1.5em;
+	}
+
+	.range_legend {
+		line-height: 1.2em;
+	}
+
+	.range {
+		width: 800px;
+		height: 30px;
+		margin-bottom: 1em;
+		border: .1em solid #ccf;
+	}
+
+	#range_selected {
+		padding-left: 1em;
+		font-size: 1.3em;
+		line-height: 1.3em;
+	}
+
+	/* Holder stuff */
+
+	#holder {
+		font-size:1.4em;
+		margin-top:0;
+		line-height:1.1em; 
+		position:relative;
+		width:30em;
+	}
+
+	.holder_title {
+		position:absolute;
+		background: white;
+		padding: 0 .2em;
+		top: -.5em;
+		left: 2%;
+	}
+
+	.holder_content {
+		clear:both;
+		border:1px solid #ddf;
+		width:96%;
+		padding:2%;
+		margin-top:.5em;
+	}
+
+</style>
+
+</head>
+
+<body onload="init_page()">
+	<div id="holder">
+		<div class="holder_title">The Very Best No Time.</div>
+		<div class="holder_content">
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the 
+			industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type 
+			and scrambled it to make a type specimen book. It has survived not only five centuries, but also 
+			the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 
+			1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with 
+			desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+		</div>
+	</div>	
+
+	<div class="object">
+		<div class="object_title">
+			Dell Performance Center
+		</div>
+		<div class="object_options_status">
+			<span class="object_status">Committed successfully.</span>
+			<span class="object_selectable_option">[collapse]</span>
+		</div>
+		<div class="object_body">
+			<table class="key_value">	
+				<tr class="key_value_pair">
+					<td class="key_value_key">Name:</td>
+					<td class="key_value_value">Dell Performance Center</td>
+				</tr>
+				<tr class="key_value_pair">
+					<td class="key_value_key">Subsidy Cost:</td>
+					<td class="key_value_value">Classical Music Concert</td>
+				</tr>
+				<tr class="key_value_pair">
+					<td class="key_value_key">Date:</td>
+					<td class="key_value_value">January 2nd, 2007</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="object">
+		<div class="object_title">
+			Dell Performance Center
+		</div>
+		<div class="object_options_status">
+			<span class="object_status">Committed successfully.</span>
+			<span class="object_selectable_option">[collapse]</span>
+		</div>
+		<div class="object_body">
+			<table class="key_value">	
+				<tr class="key_value_pair">
+					<td class="key_value_key">Name:</td>
+					<td class="key_value_value">Dell Performance Center</td>
+				</tr>
+				<tr class="key_value_pair">
+					<td class="key_value_key">Subsidy Cost:</td>
+					<td class="key_value_value">Classical Music Concert</td>
+				</tr>
+				<tr class="key_value_pair">
+					<td class="key_value_key">Date:</td>
+					<td class="key_value_value">January 2nd, 2007</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="range_container">
+	<div class="range_title">
+		Monday, January 3rd, 2008	
+	</div>
+
+	<div class="range">
+		<div onmouseout="mouseover();" onmouseover="mouseover('blue');" style="
+			background: #88f;
+			border-left:3px solid #55c;
+			border-right:3px solid #55c;
+			position: relative; 
+			width: 10%; 
+			height: 100%; 
+			left:30%; 
+			top: 0px;">
+		</div>
+
+		<div onmouseout="mouseover();" onmouseover="mouseover('green');" style="
+			background: #5c5;
+			border-left:3px solid #585;
+			border-right: 3px solid #585;
+			position: relative; 
+			width: 10%; 
+			height: 100%; 
+			left:40%; 
+			top: -100%;">
+		</div>
+
+		<div onmouseout="mouseover();" onmouseover="mouseover('blue_late');" style="
+			background: #88f;
+			border-left:3px solid #55c;
+			border-right: 3px solid #55c;
+			position: relative; 
+			width: 10%; 
+			height: 100%; 
+			left:60%; 
+			top: -200%;">
+		</div>
+
+		<div style="position:relative;left:0%; top:1em; width:10%;">3PM</div>
+		<div style="position:relative;left:10%; top:1em; width:10%;">4PM</div>
+		<div style="position:relative;left:20%; top:1em; width:10%;">5PM</div>
+		<div style="position:relative;left:30%; top:1em; width:10%;">6PM</div>
+		<div style="position:relative;left:40%; top:1em; width:10%;">7PM</div>
+		<div style="position:relative;left:50%; top:1em; width:10%;">8PM</div>
+		<div style="position:relative;left:60%; top:1em; width:10%;">9PM</div>
+		<div style="position:relative;left:70%; top:1em; width:10%;">10PM</div>
+		<div style="position:relative;left:80%; top:1em; width:10%;">11PM</div>
+		<div style="position:relative;left:90%; top:1em; width:10%;">12PM</div>
+		<div style="position:relative;left:100%; top:1em; width:10%;">1AM</div>
+
+	</div>
+	</div>
+
+	<div class="range_container">
+	<div class="range_title">
+		Tuesday, January 4th, 2008	
+	</div>
+
+	<div class="range">
+		<div onmouseout="mouseover();" onmouseover="mouseover('blue');" style="
+			background: #88f;
+			border-left:3px solid #55c;
+			border-right:3px solid #55c;
+			position: relative; 
+			width: 10%; 
+			height: 100%; 
+			left:30%; 
+			top: 0px;">
+		</div>
+
+		<div onmouseout="mouseover();" onmouseover="mouseover('blue_late');" style="
+			background: #88f;
+			border-left:3px solid #55c;
+			border-right: 3px solid #55c;
+			position: relative; 
+			width: 10%; 
+			height: 100%; 
+			left:60%; 
+			top: -100%;">
+		</div>
+
+	</div>
+	<div> <span id="range_selected">Mouseover an event.</span> </div>
+	</div>
+
+</body>
+</html>

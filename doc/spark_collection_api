@@ -1,0 +1,114 @@
+The Sparks Collection can be divided into two categories, Sparks and Sparklets. Sparklets contain event-handling and display capability. Sparks inherit from Sparklets and add item-manipulation capability.
+
+---
+
+Global functions and properties
+
+_global_counter - MochiKit counter() object. Used everywhere, use it freely.
+
+event_loop - EventLoop instance. Changing this after it's been used will destroy the world.
+
+Spark.sparks - Dict of all registered Sparks. Almost never used anymore since Signal makes it obsolete. All Sparks, once created, should be appended to this dict.
+
+---
+
+Global functions provided in Sparks.standard.js
+
+sparklet_init(sparklet)
+
+Parameters provided:
+
+sparklet - Sparklet to initialize.
+
+Returns:
+None.
+
+Description:
+This is the standard implementation for a Sparklet, registering it in Spark.sparks, registering it as a source in event_loop, and assigning it an id and event_string. You should always call this method in your constructors for Sparklets.
+
+
+spark_init(spark, controller)
+
+Parameters provided:
+
+spark - Spark to initialize.
+
+controller - optional, this will make all item-manipulation functions defer to this Spark.
+
+Returns:
+None.
+
+Description:
+This is the standard implementation for a Spark, calling sparklet_init, and if controller is provided, assigning that. If controller is not provided, it is assumed this will act as a container and Spark.items is created.
+
+---
+
+Global functions provided in Sparks.base.js
+
+get_file_parts(filename)
+	Splits a filename by its last period into the dict: {"filename":filename_body, "extension":extension}
+
+print_stack(stack)
+	Takes the stack in Error.stack and splits it into a more readable format to be displayed in the log, returning the new string. stack can also be an Error.
+
+pluralize(num, singular, plural)
+	If num is one, returns singular, else return plural or singular+"s" in that order of preference.
+
+snakerize(string)
+	Snakerizes a camelized string ("XMLHttpRequest" --> "xml_http_request")
+
+is_lower_case(string)
+	Self-explanatory
+
+is_upper_case(string)
+	Self-explanatory
+
+---
+
+Global functions provided in Sparks.visuals.js
+
+Methods:
+
+connect_elem(slot, node, attrs)
+	calls connect(node, 'onchange', slot) after calling updateNodeAttributes(node, attrs). Useful when you want to have a connect, but don't want to define an element explicitly, since it returns the node, instead of the unique-slot id that connect returns.
+	This function will throw if a undefined slot is given.
+
+selectify(slot, options, selected, attrs)
+	Makes a dropdown-selection menu (SELECT() element) given the parameters.
+	This function will throw if an undefined slot is given.
+	Once an item is called, that item's "value" property will be passed to slot. Notice that this means slot will not act like a regular call to connect(), which merely passes the event.
+	This will return the created SELECT() element.
+
+slot - method that will be called when an item is selected.
+
+options - a dict of options, the key will be the "value" property of that option, and the value will be the readable portion of that option.
+
+selected - the currently selected option.
+
+attrs - these attributes will be applied to the SELECT element.
+
+linkify(slot, node, attrs)
+	will connect slot to clicks on node. if attrs.onmouseover is defined, that value is used as the mouseover_class. If not, the mouseover_class defaults to "hovering". On mouseover, the specified mouseover class and "underlined" are added to the element. On mousedown, "underlined" is removed, and on mouseout, mouseover_class and "underlined" are removed if present. 
+	
+	attrs is applied to the node, and any attributes after node will be appended to node through appendChildNodes so that this can be seamlessly inline when making DOM trees.
+
+delinkify(node)
+	calls onmouseout for the node, then removes all signals from node.
+
+replace_element_class(id, old_class_name, new_class_name)
+	removes old_class_name if present, and always adds new_class_name
+
+switch_dom(obj, other)
+	actually switches two DOM elements
+
+is_visible(elem)
+	returns false if the elem has the "invisible" class or if its display is none.
+
+make_visible(elem)
+	makes all elem's visible by removing "invisible" and making display "block" if it was originally "none"
+
+make_invisible(elem)
+	make all elem's invisible by adding "invisible" to them
+	
+toggle_visible(elem)
+	self-explanatory

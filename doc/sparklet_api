@@ -1,0 +1,189 @@
+Properties:
+
+spark_type - String
+
+Description:
+The name of the class that this Spark is, "TabSelector", "StepSelector." Used internally to generate a more meaningful id, and in toString.
+
+Initial value:
+This property is explicitly assigned when creating a new Spark, usually in the prototype, and sparklet_init will error if it is not provided.
+
+Mutability:
+This property should never be changed once assigned, nor will it be changed by Spark internals.
+
+
+id - String
+
+Description:
+The name of this Sparklet, used in event_loop and usually used in the id of the DOM element in output.
+
+Initial value:
+This property will be assigned via a call to sparklet_init, which will simply do snakerize(<spark_type>) + "_" + _global_counter().
+
+Mutability:
+For many reasons, this value should never be changed once assigned, nor will it be changed by Spark internals.
+
+
+event_queue - List
+
+Description:
+A list of pending events for the Spark. This queue is periodically reduced by iterations of event_loop, and all events that are created from this Spark will be push'd to this queue.
+
+Initial value:
+This property will be assigned via a call to sparklet_init.
+
+Mutability:
+Adding Event objects to this queue is standard behavior, though explicitly removing them before event_loop leads to undefined behavior. All events should be added to the end of this queue.
+
+
+Sparklet helper properties:
+
+default_parent - String - optional
+
+Description:
+The standard Sparklet.output will use this value to make the root DOM element of this Spark in a call to createDOM. This parameter is optional, and output will default to a DIV.
+
+Initial value:
+This property should be specified when writing a new spark, but is not needed if the Spark will already be a DIV.
+
+Mutability:
+Changing this element can be done, but of course, no changes will be observed until the next Sparklet.display(). However, the behavior can be emulated in much cleaner way by passing the desired parent-type to Sparklet.output.
+
+parent_attributes - Dict - optional
+
+Description:
+The standard Sparklet.output will use this value in a call to updateNodeAttributes to the parent element.
+The id attribute will be overwritten and is not necessary to specify here.
+
+Initial value:
+This property can be specified when writing a new Spark if custom attributes are necessary for the parent.
+
+Mutability:
+Changing this element is not recommended once assigned.
+
+event_string - String - highly deprecated
+
+Description:
+When making onclick, onmouseover, etc. calls, event_string provides a "Spark.sparks[<Spark.id>]." string to use. Since Sparks now exclusively use MochiKit's signal, this is unnecessary.
+
+Initial value:
+This property is specified in sparklet_init in the standard implementation.
+
+Mutability:
+Not recommended.
+
+
+---
+
+Methods:
+
+output(parent)
+
+Parameters provided:
+
+parent - optional, the DOM tree for this Spark will be appended to the parent.
+
+Returns:
+Constructed DOM tree for this Sparklet.
+
+Mutability:
+Fully allowed.
+
+Standard implementation:
+This will first create a parent, if not provided. Parent will default to a div if Sparklet.default_parent is not specified. Parent's attributes are then updated with parent_attributes, then id is set to Sparklet.id. After this, this will try either output_body, output_selected, or title, in that order of preference, to generate a valid body for this Sparklet.
+
+
+output_body() - recommended
+
+Returns:
+Some value that's able to be used in a appendChildNodes call (DOM element, string, number, array, etc.)
+
+Standard implementation:
+This function is not implemented in the standard. Developers will almost always use this function to write output code for their sparks.
+
+
+display(replacing_id)
+
+Parameters provided:
+
+replacing_id - optional, the element specified by this id (or element) will be replaced by whatever is returned from Sparklet.output()
+
+Returns:
+None.
+
+Mutability:
+Unnecessary.
+
+Events emitted:
+"display"
+
+Standard implementation:
+First will add a "display" event to the queue for this Sparklet. The event will be preempted if replacing_id is specified, but the element it refers to doesn't exist. If the event is authorized, Sparklet._display() is called and the replacing_id or Spark.id is replaced by output(), then, if found, post_display() will be called.
+
+
+post_display() - optional
+
+Returns:
+None.
+
+Standard implementation:
+This function is not implemented in the standard. It's called after the result of output is appended to the real DOM tree, so calls to getElement work. For example, Calendar uses this to color dates that have events occurring on them.
+
+
+_display()
+
+Internally used by standard Sparklet implementation.
+
+
+title()
+
+Returns:
+A valid title of this Sparklet.
+
+Mutability:
+Fully allowed
+
+Standard implementation:
+This will return either Sparklet._title, Sparklet.selected().title(), or Spark.id, in that order of preference.
+
+
+toString()
+
+Returns:
+A debug-spewish string...
+
+Mutability:
+Fully allowed
+
+Standard implementation:
+Returns a detail string of the state of this Sparklet.
+
+
+handle_event(event, callback)
+
+Parameters provided:
+
+event - event that is the subject of this action.
+callback - callback function for returning authorization status
+
+Returns:
+True if listening, nothing if authorizing.
+
+Mutability:
+Recommended
+
+Standard implementation:
+This will return a blind true to the callback on authorization, ignore errors, and return true on listenings. If the command is an "item_changed", display will be called.
+
+
+attach_spark(spark)
+
+Parameters provided:
+
+spark - spark to register as a handler for this Sparklet
+
+Mutability:
+Unnecessary
+
+Standard implementation:
+Registers a handler for this Spark.

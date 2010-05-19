@@ -1,0 +1,197 @@
+At their core, a Spark is a asynchronous container with the framework, but very
+little implementation, for display. A Spark extends a Sparklet, and thus all
+methods and properties in Sparklet are available. The following is a collection
+of the methods and properties unique to Sparks.
+
+Properties:
+
+_items - Array
+
+Description:
+The array of items that this Spark contains.
+
+Initial value:
+Assigned in spark_init(spark, container) if container is not provided.
+
+Mutability:
+This value should never be accessed directly. See items()
+
+
+_selected - Object
+
+Description:
+Currently selected item, will always be a valid item unless no items are
+present.
+
+Initial value:
+Assigned when the first item is added, and in successful select() calls
+thereafter.
+
+Mutability:
+This value should never be accessed directly. See selected()
+
+
+_controller - Spark
+
+Description:
+If a controller is provided in the constructor, this will be set to that value.
+From thereon after, all item-manipulation calls will defer transparently to the
+controller so that all Sparks are in fact, Sparks, even though they may not
+actually be a container.
+
+Initial value:
+If provided in spark_init, it is assigned there.
+
+Mutabililty:
+This value should never be accessed directly.
+
+
+Methods:
+
+selected()
+
+Returns:
+The selected item for this Spark.
+
+Mutability:
+Not recommended.
+
+Standard implementation:
+If this Spark has a controller, returns controller.selected(), otherwise returns
+Spark._selected.
+
+items()
+
+Returns:
+The items for this Spark.
+
+Mutability:
+Not recommended.
+
+Standard implementation:
+If this Spark has a controller, returns controller.items(), otherwise returns
+Spark._items.
+
+
+output_selected()
+
+Returns:
+Coerces a output from selected(). If !selected(), this function returns nothing.
+
+Mutability:
+Fully allowed.
+
+Standard implementation:
+Will first try variations of output, then title, and then return selected()
+itself encased in a DIV.
+
+
+add(item)
+
+Parameters provided:
+item - item to add.
+
+Mutability:
+Not recommended.
+
+Events emitted:
+"item_added", "item_changed"
+
+Standard implementation:
+If controller is provided, calls controller.add(item). Otherwise, adds
+"item_added" event to its queue.
+
+
+add_all(values)
+
+Parameters provided:
+values - array of items to add.
+
+Mutability:
+Not recommended
+
+Events emitted:
+"item_added", "item_changed"
+
+Standard implementation:
+If controller is provided, calls controller.add_all(values). Otherwises, adds
+"item_added" event to its queue.
+
+
+clear()
+
+Mutability:
+Not recommended
+
+Events emitted:
+"item_removed", "item_changed"
+
+Standard implementation:
+Calls remove_all().
+
+
+jump(jump_length)
+
+Parameters provided:
+jump_length - Number of items to "jump"
+
+Mutability:
+Not recommended
+
+Events emitted:
+"item_selected"
+
+Standard implementation:
+Used to go to the next or the previous event. This will always be a valid event,
+so jump_length's larger than items.length will be mod'ed to a correct value.
+
+
+remove(item)
+
+Parameters provided:
+item - item to remove.
+
+Mutability:
+Not recommended
+
+Events emitted:
+"item_removed", "item_changed"
+
+Standard implementation:
+If controller is provided, will call controller.remove(item). Otherwise, it will
+add a "item_removed" event to the queue. This will remove all items that
+compare() returns 0 to.
+
+
+remove_all(items)
+
+Parameters provided:
+items - items to remove.
+
+Mutability:
+Not recommended
+
+Events emitted:
+"item_removed", "item_changed"
+
+Standard implementation:
+If controller is provided, will call controller.remove_all(items). Otherwise, it
+will add a "item_removed" event to the queue.
+
+
+select(selected)
+
+Parameters provided:
+selected - item to select.
+
+Mutability:
+Not recommended
+
+Events emitted:
+"item_selected"
+
+Standard implementation:
+If controller is provided, will call controller.select(selected). If selected is
+undefined, this will automatically select the first item without emitting an
+event. Otherwise, it will add a "item_selected" event to its queue.
+

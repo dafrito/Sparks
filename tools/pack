@@ -1,0 +1,2 @@
+python ./group_files.py
+java -jar ./compressor.jar -c sparks_collection.js > ../js/external/sparks.js

@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<!-- MochiKit -->
+<!-- <script type="text/javascript">MochiKit = {__export__: false};</script> -->
+<script type="text/javascript" src="js/external/MochiKit/MochiKit.js"></script>
+<script type="text/javascript" src="js/external/MochiKit/Base.js"></script>
+<script type="text/javascript" src="js/external/MochiKit/Iter.js"></script>
+<script type="text/javascript" src="js/external/MochiKit/Async.js"></script>
+<script type="text/javascript" src="js/external/MochiKit/DOM.js"></script>
+<script type="text/javascript" src="js/external/MochiKit/Logging.js"></script>
+<script type="text/javascript" src="js/external/MochiKit/Signal.js"></script>
+<script type="text/javascript" src="js/external/MochiKit/DragAndDrop.js"></script>
+<script type="text/javascript" src="js/external/MochiKit/Sortable.js"></script>
+<script type="text/javascript" src="js/external/MochiKit/Test.js"></script>
+<!-- Core framework -->
+<script type="text/javascript" src="js/Core.js"></script>
+<script type="text/javascript" src="js/Strings.js"></script>
+<script type="text/javascript" src="js/Adapters.js"></script>
+<script type="text/javascript" src="js/Iterable.js"></script>
+<script type="text/javascript" src="js/EventLoop.js"></script>
+<script type="text/javascript" src="js/Asynchronous.js"></script>
+<script type="text/javascript" src="js/Repeating.js"></script>
+<script type="text/javascript" src="js/Date.js"></script>
+<script type="text/javascript" src="js/Elements.js"></script>
+<script type="text/javascript" src="js/Transformer.js"></script>
+<!-- Adapters -->
+<script type="text/javascript" src="js/Adapters.utility.js"></script>
+<script type="text/javascript" src="js/Adapters.introspective.js"></script>
+<script type="text/javascript" src="js/Adapters.relational.js"></script>
+<script type="text/javascript" src="js/Adapters.transformations.js"></script>
+<!-- Components -->
+<script type="text/javascript" src="js/EventSource.js"></script>
+<script type="text/javascript" src="js/ItemPointer.js"></script>
+<script type="text/javascript" src="js/Dict.js"></script>
+<script type="text/javascript" src="js/List.js"></script>
+<script type="text/javascript" src="js/Presenter.js"></script>
+<script type="text/javascript" src="js/Tree.js"></script>
+<script type="text/javascript" src="js/KeyValue.js"></script>
+<script type="text/javascript" src="js/AssetRegistry.js"></script>
+<script type="text/javascript" src="js/SwitchableElement.js"></script>
+<script type="text/javascript" src="js/ElementList.js"></script>
+<script type="text/javascript" src="js/KeyWatcher.js"></script>
+<script type="text/javascript" src="js/MetaObject.js"></script>
+<script type="text/javascript" src="js/DimensionBar.js"></script>
+<script type="text/javascript" src="js/SelectionGroup.js"></script>
+<script type="text/javascript" src="js/Effects.js"></script>
+<script type="text/javascript" src="js/Fetcher.js"></script>
+<script type="text/javascript" src="js/EffectsLibrary.js"></script>
+<!-- Implementation-specifics -->
+<script type="text/javascript" src="js/Economics.js"></script>
+<script type="text/javascript"><!--
+
+function init_page() {
+	document.onclick = partial(interrupt, "play");
+	Sparks.initialize();
+	circle();
+}
+
+function jump() {	
+	e = new Sparks.Effect({
+		elements:Sparks.Fetcher("#views div"), 
+		duration:2, 
+		stagger:.08,
+		effects:[
+			new Sparks.Effect.Move({
+				stagger:.5,
+				values:[[0, 100], [0, -100]]
+			}),
+			new Sparks.Effect.Opacity({
+				stagger:1,
+				values:[1, 0, 1]
+			})
+		]
+	});
+	e.preprocessors.push(Sparks.Effects.curved_preprocessor); 
+	e.preprocessors.push(Sparks.Effects.staggered_preprocessor); 
+}
+
+function circle() {	
+	e = new Sparks.Effect({
+		elements:Sparks.Fetcher("#views div"), 
+		duration:10, 
+		stagger:.2,
+		effects:[
+			new Sparks.Effect.Move({
+				values:[[-200,0], [0, 100], [200, 0], [0, -100]]
+			}),
+			new Sparks.Effect.Opacity({
+				values:[1, 0, 1]
+			})
+		]
+	});
+	e.preprocessors.push(Sparks.Effects.curved_preprocessor); 
+	e.preprocessors.push(Sparks.Effects.staggered_preprocessor); 
+}
+
+function interrupt(action) {
+	if(e.running_deferred && action == "play") 
+		swapDOM("error", DIV({id:"error"}, "Seriously! What the hell, man! Think of the internet!"));
+	else
+		e.interrupt(action);
+}
+
+// --></script>
+
+<title>EventMagnet</title>
+
+<style>
+
+input {
+	border: 1em solid green;
+}
+
+#error {
+	clear:both;
+}
+
+#views {
+	margin-left:40em;
+	clear:both;
+}
+
+body {
+	padding:0;
+	margin:0;
+	font: normal 14px 'Verdana', sans-serif;
+	font-size: 62.5%;
+	line-height: 1.2em;
+}
+
+
+.box {
+	color:white;
+	text-align:center;
+	background:#88f;
+	float:left;
+	width:3em;
+	height:3em;
+}
+
+.options div {
+	float:left;
+	font-size:1.4em;
+	padding:.5em;
+}
+
+</style>
+
+</head>
+
+<body onload="init_page()">
+<div class="options">
+<div>
+	Click anywhere to play. The animation must complete before clicking again.
+	<br/> <br/>
+	Otherwise, you will <i>kill</i> the internet.
+</div>
+<!--<div onclick="interrupt('reverse');">Click to reverse</div>
+<div onclick="interrupt('pause');">Click to pause</div>
+<div onclick="interrupt('freeze');">Click to freeze</div>
+<div onclick="interrupt('unfreeze');">Click to unfreeze</div>
+<div onclick="interrupt('rush');">Click to rush</div>
+<div onclick="interrupt('cancel');">Click to cancel</div>
+<div onclick="interrupt('undo');">Click to undo</div>
+<div onclick="interrupt('stop_undo');">Click to stop_undo</div>
+-->
+<div id="error"></div>
+</div>
+
+<div id="views">
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+</div>
+
+<input type="hidden"></input>
+
+</body>
+</html>
