@@ -3,19 +3,22 @@ DISTDIR := $(BUILDDIR)/dist
 SRCDIR := js
 
 DEPENDENCIES := dependency.list
-DISTRIBUTABLES := $(addprefix sparks, .js .js.gz .js.zip .js.bz2)
+DISTRIBUTABLES := MochiKit.js $(addprefix sparks, .js .js.gz .js.zip .js.bz2)
 
 all: dist
 .PHONY: all
 
-dist: $(addprefix $(DISTDIR)/, $(DISTRIBUTABLES)) | $(DISTDIR)
+dist: mochikit $(addprefix $(DISTDIR)/, $(DISTRIBUTABLES)) | $(DISTDIR)
 
 mochikit: $(BUILDDIR)/mochikit
 .PHONY: mochikit
 
 $(BUILDDIR)/mochikit: | $(BUILDDIR)
-	git clone git://github.com/mochi/mochikit.git
-	
+	git clone http://github.com/mochi/mochikit.git $(BUILDDIR)/mochikit
+
+$(DISTDIR)/MochiKit.js: $(BUILDDIR)/mochikit | $(DISTDIR)
+	cd $(DISTDIR) && ln -s ../mochikit/packed/MochiKit/MochiKit.js
+
 $(DISTDIR)/sparks.js.bz2: $(DISTDIR)/sparks.js
 	bzip2 -c $<  >$@
 
@@ -40,6 +43,10 @@ $(BUILDDIR):
 	mkdir $(BUILDDIR)
 
 clean:
-	rm -rf $(BUILDDIR)
 	rm -rf $(DISTDIR)
+	rm -f $(BUILDDIR)/sparks-unpacked.js
+.PHONY: clean
+
+clean-all:
+	rm -rf $(BUILDDIR)
 .PHONY: clean
