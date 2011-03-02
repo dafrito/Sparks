@@ -2,55 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<!-- MochiKit -->
-<!-- <script type="text/javascript">MochiKit = {__export__: false};</script> -->
-<script type="text/javascript" src="js/external/MochiKit/MochiKit.js"></script>
-<script type="text/javascript" src="js/external/MochiKit/Base.js"></script>
-<script type="text/javascript" src="js/external/MochiKit/Iter.js"></script>
-<script type="text/javascript" src="js/external/MochiKit/Async.js"></script>
-<script type="text/javascript" src="js/external/MochiKit/DOM.js"></script>
-<script type="text/javascript" src="js/external/MochiKit/Logging.js"></script>
-<script type="text/javascript" src="js/external/MochiKit/Signal.js"></script>
-<script type="text/javascript" src="js/external/MochiKit/DragAndDrop.js"></script>
-<script type="text/javascript" src="js/external/MochiKit/Sortable.js"></script>
-<script type="text/javascript" src="js/external/MochiKit/Test.js"></script>
-<!-- Core framework -->
-<script type="text/javascript" src="js/Core.js"></script>
-<script type="text/javascript" src="js/Strings.js"></script>
-<script type="text/javascript" src="js/Adapters.js"></script>
-<script type="text/javascript" src="js/Iterable.js"></script>
-<script type="text/javascript" src="js/EventLoop.js"></script>
-<script type="text/javascript" src="js/Asynchronous.js"></script>
-<script type="text/javascript" src="js/Repeating.js"></script>
-<script type="text/javascript" src="js/Date.js"></script>
-<script type="text/javascript" src="js/Elements.js"></script>
-<script type="text/javascript" src="js/Transformer.js"></script>
-<!-- Adapters -->
-<script type="text/javascript" src="js/Adapters.utility.js"></script>
-<script type="text/javascript" src="js/Adapters.introspective.js"></script>
-<script type="text/javascript" src="js/Adapters.relational.js"></script>
-<script type="text/javascript" src="js/Adapters.transformations.js"></script>
-<!-- Components -->
-<script type="text/javascript" src="js/EventSource.js"></script>
-<script type="text/javascript" src="js/ItemPointer.js"></script>
-<script type="text/javascript" src="js/Dict.js"></script>
-<script type="text/javascript" src="js/List.js"></script>
-<script type="text/javascript" src="js/Presenter.js"></script>
-<script type="text/javascript" src="js/Tree.js"></script>
-<script type="text/javascript" src="js/KeyValue.js"></script>
-<script type="text/javascript" src="js/AssetRegistry.js"></script>
-<script type="text/javascript" src="js/SwitchableElement.js"></script>
-<script type="text/javascript" src="js/ElementList.js"></script>
-<script type="text/javascript" src="js/KeyWatcher.js"></script>
-<script type="text/javascript" src="js/MetaObject.js"></script>
-<script type="text/javascript" src="js/DimensionBar.js"></script>
-<script type="text/javascript" src="js/SelectionGroup.js"></script>
-<script type="text/javascript" src="js/Effects.js"></script>
-<script type="text/javascript" src="js/Fetcher.js"></script>
-<script type="text/javascript" src="js/EffectsLibrary.js"></script>
-<!-- Implementation-specifics -->
-<script type="text/javascript" src="js/Economics.js"></script>
-<script type="text/javascript"><!--
+<script src="js/MochiKit.js"></script>
+<script src="js/sparks.js"></script>
+<script>
 
 function init_page() {
 	document.onclick = partial(interrupt, "play");
@@ -103,7 +57,7 @@ function interrupt(action) {
 		e.interrupt(action);
 }
 
-// --></script>
+</script>
 
 <title>EventMagnet</title>
 
