@@ -3,3 +3,5 @@ same problem I dealt with in FritoMod, so code reuse could end up with a win-win
 * Tests?! There are no tests?!
 * Evaluate what's worth keeping and what we can chunk. Do we need the MochiKit
 dependency, for example?
+* Demos should have debug/no-debug options
+* Evaluate what's in trash
