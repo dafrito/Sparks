@@ -1,4 +1,4 @@
-﻿// Sparks.Core
+// Sparks.Core
 
 /* 
 	The center of all Sparks activity, you'll find all constructors,
@@ -467,3 +467,4 @@ Sparks = {
 			Sparks.snakerize(obj.type) + "_" + Sparks.counter();
 	}
 };
+
